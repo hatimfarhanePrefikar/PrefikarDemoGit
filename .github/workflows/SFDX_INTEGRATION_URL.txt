@@ -1,0 +1,13 @@
+{
+  "status": 0,
+  "result": {
+    "id": "00D7R0000042bk4UAA",
+    "accessToken": "00D7R0000042bk4!AREAQMl2oA88dOxluvWQKzNFgu9uoCyA9E9fSQusZb7HxkSYKBchC5s2H_mpOHuqS7HrQoW_9qTDDuFkl9nrkw6LS5NZEm7I",
+    "instanceUrl": "https://curious-raccoon-cttpfo-dev-ed.my.salesforce.com",
+    "username": "hatimfarhane@curious-raccoon-cttpfo.com",
+    "clientId": "PlatformCLI",
+    "connectedStatus": "Connected",
+    "sfdxAuthUrl": "force://PlatformCLI::5Aep861Y8l_6ioFzLX_eLEiZNYt23ZHAU3d059DrHmCTEUMvmWxVs0sxS5VvilDKLhTluIETJ1A31JtWBqqk5U6@curious-raccoon-cttpfo-dev-ed.my.salesforce.com",
+    "alias": "githubNob1"
+  }
+}
