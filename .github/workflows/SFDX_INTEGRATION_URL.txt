@@ -1,0 +1,10 @@
+=== Org Description
+KEY               VALUE
+────────────────  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Access Token      00D7R0000042bmA!ARsAQHHQStlSIOvTGVPp4Qnu0IgDtIDutN36dPJBxOK2kyHHKEWWSO_fxhyfT3UhcwEED3.mCP36RtnGexMBMPcngzgpA4je
+Alias             GithubDev6
+Client Id         PlatformCLI
+Connected Status  Connected
+Id                00D7R0000042bmAUAQ
+Instance Url      https://curious-badger-pee7qu-dev-ed.my.salesforce.com
+Username          hatimfarhane@curious-badger-pee7qu.com
