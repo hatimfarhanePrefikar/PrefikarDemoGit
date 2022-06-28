@@ -6,9 +6,6 @@ on:
     push:
       branches: 
         - develop
-      paths:
-        - 'force-app/**'
-            
 
 # Jobs to be executed
 jobs:
