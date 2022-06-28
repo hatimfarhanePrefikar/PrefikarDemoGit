@@ -48,5 +48,5 @@ jest.config.js
 package.json
 .husky/*
 config/*
-sfdx-project.json
 force-app/**/.eslintrc.json
+scripts/*

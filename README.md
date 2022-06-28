@@ -1,7 +1,3 @@
-# PrefikarDemoGit
-This is a demo Repo for Prefikar. 
-27/06/2022 First config of VS CODE with this repo
-
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
