@@ -40,9 +40,10 @@ jobs:
             # Store secret for both otgs
             - name: 'Populate auth file with SFDX_URL secret of the integration and staging orgs'
               shell: bash
+              env:
+                SUPER_SECRET: ${{ secrets.SFDX_INTEGRATION_URL }}
               run: |
-                  echo ${{ secrets.SFDX_INTEGRATION_URL}} > ./SFDX_INTEGRATION_URL.txt
-                  echo ${{ secrets.SFDX_STAGING_URL}} > ./SFDX_STAGING_URL.txt
+                  echo ${{ secrets.SFDX_INTEGRATION_URL}} > "$SUPER_SECRET"
 
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
@@ -51,7 +52,9 @@ jobs:
 
             # Authenticate to org
             - name: 'Authenticate to Integration Org'
-              run: sfdx auth:sfdxurl:store -f ./SFDX_INTEGRATION_URL.txt -s -a dev6
+              env:
+                SUPER_SECRET: ${{ secrets.SFDX_INTEGRATION_URL }}
+              run: sfdx auth:sfdxurl:store -f "$SUPER_SECRET" -s -a dev6
 
             - name: 'Deploy the entire branch to Integration org'
               run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json
