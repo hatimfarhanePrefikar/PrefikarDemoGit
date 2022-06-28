@@ -8,6 +8,6 @@ private with sharing class AccountTriggerTest {
             Account testAccount = new Account( Name = 'Test Account' );
             insert testAccount;
             testAccount = [select Id, Name from Account where Id = :testAccount.Id];
-            System.assertEquals(testAccount.Name, 'Test Account');  
+            System.assertEquals(testAccount.Name, 'Test Account',true);  
     }
 }
