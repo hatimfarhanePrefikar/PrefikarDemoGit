@@ -29,7 +29,7 @@ jobs:
         with:
           analyse-all-code: 'true'
           pmd-version: 'latest'
-          file-path: '/force-app/main/default'
+          file-path: './force-app/main/default'
           rules-path: './pmd-ruleset.xml'
           error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
           note-rules: 'ApexDoc'
@@ -39,7 +39,7 @@ jobs:
         uses: synergy-au/pmd-analyser-action@v2.1
         with:
           pmd-version: 'latest'
-          file-path: '/force-app/main/default'
+          file-path: './force-app/main/default'
           rules-path: './pmd-ruleset.xml'
           error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
           note-rules: 'ApexDoc'
