@@ -1,28 +1,55 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: pmd
-
+name: PMD Static Code Analysis
 on:
-  push:
-    branches: [ "develop" ]
   pull_request:
-    branches: [ "develop" ]
-  schedule:
-    - cron: '35 * * * *'
-
-permissions:
-  contents: read
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
 
 jobs:
-  pmd-code-scan:
+  pmd-analyser-check:
+    name: PMD Static Code Analysis
     permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      security-events: write
+      actions: read
+      contents: read
     runs-on: ubuntu-latest
     steps:
-      - name: Check APEX
-        uses: legetz/setup-pmd@v6.44
-      - run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          # Incremental diffs require fetch depth to be at 0 to grab the target branch
+          fetch-depth: '0'
+      - name: Run Full PMD Analysis
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        id: pmd-full-analysis
+        uses: synergy-au/pmd-analyser-action@v2.1
+        with:
+          analyse-all-code: 'true'
+          pmd-version: 'latest'
+          file-path: '/force-app/main/default'
+          rules-path: './pmd-ruleset.xml'
+          error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
+          note-rules: 'ApexDoc'
+      - name: Run PMD Analysis on Files Changed
+        id: pmd-partial-analysis
+        if: github.event.pull_request != null
+        uses: synergy-au/pmd-analyser-action@v2.1
+        with:
+          pmd-version: 'latest'
+          file-path: '/force-app/main/default'
+          rules-path: './pmd-ruleset.xml'
+          error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
+          note-rules: 'ApexDoc'
+      - name: Upload results to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: pmd-output.sarif
+      - name: No PMD Errors?
+        run: |
+          if ${{ steps.pmd-full-analysis.outputs.error-found }} ${{ steps.pmd-partial-analysis.outputs.error-found }}
+          then
+            exit 3
+          fi
