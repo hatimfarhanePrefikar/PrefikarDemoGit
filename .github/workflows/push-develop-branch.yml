@@ -5,7 +5,7 @@ name: Deploy Feature branch to Diffrentes Developement orgs
 on:
     push:
       branches:
-        - feature/**
+        - Feature/**
       paths:
         - 'force-app/**'
             
