@@ -50,3 +50,4 @@ package.json
 config/*
 force-app/**/.eslintrc.json
 scripts/*
+changed-sources/*
