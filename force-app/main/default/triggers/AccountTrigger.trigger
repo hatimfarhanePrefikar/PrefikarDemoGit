@@ -5,7 +5,7 @@ trigger AccountTrigger on Account (before insert) {
 	String j= '';
 	for (int i=10; i<10; i++) {
 		j='';
-		System.debug('new commit after modification');
+		System.debug('new commit after modification hellos');
 	}	
 }
 	
