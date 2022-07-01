@@ -45,13 +45,6 @@ jobs:
             - name: 'Installing java'
               run: sudo apt-get install openjdk-8-jdk
 
-            # Store secret for both otgs
-            - name: 'Populate auth file with SFDX_URL secret of the NOB1 & DEV6'
-              shell: bash
-              run: |
-                  echo ${{ secrets.SFDX_NOB1_URL}} > ./SFDX_NOB1_URL.txt
-                  echo ${{ secrets.SFDX_DEV6_URL}} > ./SFDX_DEV6_URL.txt
-
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
                   mkdir changed-sources
@@ -66,6 +59,7 @@ jobs:
             - name: 'Scan code'
               run: |
                   cd changed-sources
+                  ls
                   sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance,Code Style,Security" --outfile 'apexScanResults.sarif'  
                   cd ..
 
@@ -75,6 +69,13 @@ jobs:
               with:
                 sarif_file: changed-sources/apexScanResults.sarif
             
+            # Store secret for both otgs
+            - name: 'Populate auth file with SFDX_URL secret of the NOB1 & DEV6'
+              shell: bash
+              run: |
+                  echo ${{ secrets.SFDX_NOB1_URL}} > ./SFDX_NOB1_URL.txt
+                  echo ${{ secrets.SFDX_DEV6_URL}} > ./SFDX_DEV6_URL.txt
+
             # Authenticate to NOB1 org
             - name: 'Authenticate to Nob1 Organization Org'
               run: sfdx auth:sfdxurl:store -f ./SFDX_NOB1_URL.txt -s -a nob1
