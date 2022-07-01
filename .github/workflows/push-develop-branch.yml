@@ -5,7 +5,7 @@ name: Deploy integration branch to integration  orgs
 on:
     push:
       branches:
-        - developer
+        - feature/**
       paths:
         - 'force-app/**'
             
