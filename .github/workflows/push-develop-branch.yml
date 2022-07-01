@@ -59,7 +59,7 @@ jobs:
             - name: 'Scan code'
               run: |
                   cd changed-sources
-                  ls
+                  tree
                   sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance,Code Style,Security" --outfile 'apexScanResults.sarif'  
                   cd ..
 
