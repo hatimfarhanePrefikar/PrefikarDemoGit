@@ -1,10 +1,12 @@
-trigger AccountTrigger on Account (before insert) {
+trigger AccountTrigger on Account (after insert) {
 	String methodeHeader = 'ACCOUNT TRIGGER  ---- Before Insert : Account to BE Created ';
-	System.debug(methodeHeader);
-	System.debug('new commit after modification');
-	String j= '';
-	for (int i=10; i<10; i++) {
-		j='';
-		System.debug('new commit after modification he');
-	}	
+	System.debug(methodeHeader);{
+	for(Account account : trigger.new)
+		for (Integer i = 0; i<2 ; i++) {
+			Contact contact = new Contact(FirstName='Hatimz '+i,
+			LastName='Doe '+i,
+			Phone='415.555.1212',
+			AccountId=account.Id);
+		}
+	}
 }
