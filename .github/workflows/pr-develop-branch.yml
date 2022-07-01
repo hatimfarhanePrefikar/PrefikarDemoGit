@@ -156,7 +156,7 @@ jobs:
             - name: 'Scan code'
               run: |
                   cd changed-sources
-                  sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'  
+                  sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance,Code Style,Security" --outfile 'apexScanResults.sarif'  
                   cd ..
 
             # Now we upload the .sarif file as explained in the previous step
@@ -164,7 +164,8 @@ jobs:
               uses: github/codeql-action/upload-sarif@v1
               with:
                 sarif_file: changed-sources/apexScanResults.sarif
-            
+ 
+            # Now Download artifact created in the previous step
             - name: Download all workflow run artifacts
               uses: actions/download-artifact@v3
             

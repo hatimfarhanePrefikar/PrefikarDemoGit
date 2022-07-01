@@ -8,4 +8,3 @@ trigger AccountTrigger on Account (before insert) {
 		System.debug('new commit after modification he');
 	}	
 }
-	
