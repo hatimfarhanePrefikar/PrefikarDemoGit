@@ -74,11 +74,7 @@ jobs:
               uses: github/codeql-action/upload-sarif@v1
               with:
                 sarif_file: changed-sources/apexScanResults.sarif
-                
-            # Install SFDX scanner
-            - name: 'Installing SFDX scanner'
-              run: sfdx plugins:install @salesforce/sfdx-scanner
-
+            
             # Authenticate to NOB1 org
             - name: 'Authenticate to Nob1 Organization Org'
               run: sfdx auth:sfdxurl:store -f ./SFDX_NOB1_URL.txt -s -a nob1
