@@ -3,7 +3,7 @@ trigger AccountTrigger on Account (after insert) {
 	System.debug(methodeHeader);{
 	for(Account account : trigger.new)
 		for (Integer i = 0; i<2 ; i++) {
-			Contact contact = new Contact(FirstName='Hatim '+i,
+			Contact contact = new Contact(FirstName='Hatimz '+i,
 			LastName='Doe '+i,
 			Phone='415.555.1212',
 			AccountId=account.Id);
