@@ -5,11 +5,7 @@ name: Deploy Feature branch to Diffrentes Developement orgs
 on:
     push:
       branches:
-<<<<<<< Updated upstream
-        - developer
-=======
         - feature/**
->>>>>>> Stashed changes
       paths:
         - 'force-app/**'
             
@@ -35,6 +31,10 @@ jobs:
                   echo y | sfdx plugins:install sfdx-git-delta
                   sfdx plugins 
 
+            # Install SFDX scanner
+            - name: 'Installing SFDX scanner'
+              run: sfdx plugins:install @salesforce/sfdx-scanner
+
             # Checkout the source code
             - name: 'Checkout source code'
               uses: actions/checkout@v2
@@ -57,6 +57,24 @@ jobs:
                   mkdir changed-sources
                   sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/
 
+            # Now we can use the sfdx scanner to scan the code in the delta directory
+            # The output of the scan is stored in a file called apexScanResults.sarif
+
+            # The .sarif file can later be uploaded to github, so that we can see the 
+            # results of the scan directly from the PR.
+
+            - name: 'Scan code'
+              run: |
+                  cd changed-sources
+                  sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance,Code Style,Security" --outfile 'apexScanResults.sarif'  
+                  cd ..
+
+            # Now we upload the .sarif file as explained in the previous step
+            - name: Upload SARIF file
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                sarif_file: changed-sources/apexScanResults.sarif
+                
             # Install SFDX scanner
             - name: 'Installing SFDX scanner'
               run: sfdx plugins:install @salesforce/sfdx-scanner
