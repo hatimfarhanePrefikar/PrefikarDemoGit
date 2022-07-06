@@ -2,6 +2,6 @@
 public with sharing class ContactTriggerTest {
     @IsTest
     public ContactTriggerTest() {
-        System.assertEquals(testAccount.Name, 'Test Account',true); 
+        System.assertEquals('Test Account', 'Test Account',true); 
     }
 }
