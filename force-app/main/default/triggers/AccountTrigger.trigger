@@ -3,9 +3,9 @@ trigger AccountTrigger on Account (after insert) {
 	System.debug(methodeHeader);{
 	for(Account account : trigger.new)
 		for (Integer i = 0; i<2 ; i++) {
-			Contact contact = new Contact(FirstName='Jhon'+i,
-			LastName='Doe '+i,
-			Phone='415.555.1212',
+			Contact contact = new Contact(FirstName='George '+i,
+			LastName='Sorow '+i,
+			Phone='0042394578384',
 			AccountId=account.Id);
 		}
 	}
