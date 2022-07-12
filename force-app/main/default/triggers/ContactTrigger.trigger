@@ -1,3 +1,3 @@
-trigger ContactTrigger on SOBJECT (before insert) {
+trigger ContactTrigger on Contact (before insert) {
     System.debug('Test creation de compte');
 }
