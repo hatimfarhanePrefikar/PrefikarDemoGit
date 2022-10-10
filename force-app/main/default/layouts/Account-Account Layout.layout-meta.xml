@@ -11,6 +11,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
+                <field>PX_fieldTest__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
                 <field>BAU_fieldTest__c</field>
             </layoutItems>
             <layoutItems>
