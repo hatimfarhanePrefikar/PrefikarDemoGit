@@ -1,10 +1,8 @@
-# .github/workflows/scheduled-builds.yml
 name: Call Upsert
 
 on:
   schedule:
-    # Runs "at minute 5 past every hour" (see https://crontab.guru)
-    - cron: '*/55 * * * *'
+    - cron: '0/5 * * * *'
 jobs:
   build:
     name: Call Upsert Assessment
@@ -12,7 +10,6 @@ jobs:
     steps:
       - name: cURL request Upsert
         id: myRequest
-        # Hit the webhook endpoint to rebuild  from the "main" branch
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://alpha-scale--uat3.sandbox.my.salesforce.com/services/apexrest/v2.0/upsertAssessment/*'
