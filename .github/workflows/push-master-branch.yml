@@ -1,10 +1,8 @@
-# .github/workflows/scheduled-builds.yml
 name: Call Upsert
-
 on:
   schedule:
-    # Runs "at minute 5 past every hour" (see https://crontab.guru)
-    - cron: '48 * * * *'
+    - cron: '*/5 * * * *'
+
 jobs:
   build:
     name: Call Upsert Assessment
@@ -12,14 +10,15 @@ jobs:
     steps:
       - name: cURL request Upsert
         id: myRequest
-        # Hit the webhook endpoint to rebuild  from the "main" branch
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://alpha-scale--uat3.sandbox.my.salesforce.com/services/apexrest/v2.0/upsertAssessment/*'
+          bearerToken: '00D3M0000000jPV!AQcAQGh2esHDtAziqxFZmbyY13pgnPm8RPJM029GUL1.oHIeFtbbQWIPjR8SBrNUTxZJN07r.gmp2LiV5jmB72SDTaz8aEHK'
           method: 'POST'
-          customHeaders: '{"Authorization: Bearer 00D3M0000000jPV!AQcAQGh2esHDtAziqxFZmbyY13pgnPm8RPJM029GUL1.oHIeFtbbQWIPjR8SBrNUTxZJN07r.gmp2LiV5jmB72SDTaz8aEHK","Content-Type: application/json"}'
+          customHeaders: '{"Content-Type: application/json"}'
           data: '[{ "callerSystem": "FR_DIVA", "AssessmentNumber": "0000001309221502FR0000000066AB342AT", "Entity": "GRAS SAVOYE/ALLIANZ", "EntityCode": "295", "isShoppingList": true, "VINCheck": 0, "Parts": [{ "RecordType": "Material", "Compliance": true, "crashCode": 1, "ExternalID": "1|a6236361dce4da7dbab89224b16b7205|51786772", "ARCAUTOCode": "211001", "InputType": "Automatic", "PartLabel": "PROJECTEUR G SUPPLEMENTAIRE - Magneti Marelli (712455301129) - équipementier", "PartNumber": "ASCR-0002469468", "Price": 88.78, "Quantity": 1, "Currency": "EUR", "AlphaScaleMRID": "ASCR-0002469468" }, { "RecordType": "Material", "Compliance": true, "crashCode": 1, "ExternalID": "1|c330697281fd5c509919191e6cebee5e|51822889", "ARCAUTOCode": "211028", "InputType": "Automatic", "PartLabel": "PROJECTEUR ANTIBROUILLARD G - Opisto (PRE-51822889) - Réemploi", "PartNumber": "ASCR-0027790577", "Price": 26.12, "Quantity": 1, "Currency": "EUR", "AlphaScaleMRID": "ASCR-0027790577" }, { "RecordType": "Material", "Compliance": true, "crashCode": 1, "ExternalID": "1|64376dd680f51a517454c630258f859a|51935189", "ARCAUTOCode": "08D004", "InputType": "Automatic", "PartLabel": "RADIATEUR DE REFROIDISSEMENT MOTEUR - Nissens (693420) - équipementier", "PartNumber": "ASCR-0021848060", "Price": 173.42, "Quantity": 1, "Currency": "EUR", "AlphaScaleMRID": "ASCR-0021848060" }, { "RecordType": "Material", "Compliance": true, "crashCode": 1, "ExternalID": "1|55131e459c1576bbf04569d057f904c2|LIQREFROID", "ARCAUTOCode": "", "InputType": "Automatic", "PartLabel": "LIQUIDE DE REFROIDISSEMENT", "PartNumber": "LIQREFROID", "Price": 2.77, "Quantity": 6, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|c576c8f519279444cd3832e97ee23982", "InterventionCode": "D", "NBHoursLabourPartLevel2": 0.3, "ARCAUTOCode": "08D002", "InputType": "Automatic", "PartLabel": "DEPOSE/POSE CONDENSEUR DE CLIMATISATION", "PartNumber": "#5040A40", "Price": 0, "Quantity": 0, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|30f8c79ff00231a1985aee6aa059a8e0", "InterventionCode": "C", "NBHoursLabourPartLevel1": 0.2, "ARCAUTOCode": "211001", "InputType": "Automatic", "PartLabel": "ECHANGE PROJECTEUR G SUPPLEMENTAIRE", "PartNumber": "#5540B10", "Price": 0, "Quantity": 0, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|57dc40864f1aa43f43f253e98b061846", "InterventionCode": "V", "NBHoursLabourPartLevel1": 0.7, "ARCAUTOCode": "", "InputType": "Automatic", "PartLabel": "VIDANGE CIRCUIT DE REFROIDISSEMENT", "PartNumber": "0010T20", "Price": 0, "Quantity": 0, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|4ade773680159d2d851730e0542311d1", "InterventionCode": "C", "NBHoursLabourPartLevel1": 0.95, "ARCAUTOCode": "08D004", "InputType": "Automatic", "PartLabel": "ECHANGE RADIATEUR DE REFROIDISSEMENT MOTEUR", "PartNumber": "1088B20", "Price": 0, "Quantity": 0, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|3beedbfe2187dd9fe9635fb3221923f6", "InterventionCode": "G", "NBHoursLabourPartLevel1": 0.2, "ARCAUTOCode": "211001", "InputType": "Automatic", "PartLabel": "REGLAGE PROJECTEURS G, D", "PartNumber": "5540B38", "Price": 0, "Quantity": 0, "Currency": "EUR" }, { "RecordType": "Labour", "Compliance": false, "crashCode": 1, "ExternalID": "1|1ee4316c62f38413a9dfaefcd0965795", "InterventionCode": "C", "NBHoursLabourPartLevel1": 0.15, "ARCAUTOCode": "211028", "InputType": "Automatic", "PartLabel": "ECHANGE PROJECTEUR ANTIBROUILLARD G", "PartNumber": "5540D10", "Price": 0, "Quantity": 0, "Currency": "EUR" } ], "currentAsset": { "Colour": "BIANCO ARGENTO MET", "Brand": "FIAT", "Model": "FIAT 500", "PlateNumber": "AB342AT", "FirstRegistrationDate": "2009-06-04", "VINNumber": "ZFA31200000259645", "KMS": 0, "PaintingType": "VERNIS", "Energy": "DIESEL", "VDSCode": "312000" }, "currentBodyShop": { "ReferenceNumber": "0000000066" }, "currentClaim": { "ClaimReference": "HFE6A1309221502", "TotalAmtParts": 305.77, "TotalAmtLabour": 126.5, "TotalAmtLabourPainting": 0, "TotalAmtLabourExlPainting": 126.5, "TotalAmtPainting": 0, "TotalAmtPaintingInclLabour": 0, "AmtOthers": 0, "TotalAmtExlVAT": 432.27, "TotalVAT": 86.45, "TotalAmtInclVAT": 518.72, "QuotationAmountExlVAT": 432.27, "QuotationAmountInclVAT": 518.72, "NBHoursLabour": 2.5, "NBHoursLabourLevel1": 2.2, "NBHoursLabourLevel2": 0.3, "NBHoursLabourLevel3": 0, "NBHoursLabourPainting": 0 } } ]'
       - name: Show Response
-          run:|
-            echo ${{ steps.myRequest.outputs.response }}
-            echo ${{ steps.myRequest.outputs.headers }}
+        run: |
+          echo ${{ steps.myRequest.outputs.response }}
+          echo ${{ steps.myRequest.outputs.headers }}
+          echo ${{ fromJson(steps.myRequest.outputs.response).field_you_want_to_access }}
