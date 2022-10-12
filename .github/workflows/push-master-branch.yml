@@ -1,4 +1,4 @@
-name: Call Upsert
+name: Call Upsert From MASTER
 on:
   schedule:
     - cron: '*/5 * * * *'
