@@ -2,7 +2,7 @@ name: Call Upsert
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '26 * * * *'
 
 jobs:
   build:
