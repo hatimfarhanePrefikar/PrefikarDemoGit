@@ -1,7 +1,8 @@
 name: Call Upsert
 on:
   schedule:
-    - cron: '59 * * * *'
+    - cron: '3 * * * *'
+
 jobs:
   build:
     name: Call Upsert Assessment
